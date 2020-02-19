@@ -4,12 +4,12 @@
 #
 # Program Description : GUI for the Landsat Buoy Calibration program
 # Created By          : Benjamin Kleynhans
-# Creation Date       : May 30, 2019
+# Creation Date       : February 18, 2020
 # Authors             : Benjamin Kleynhans
 #
 # Last Modified By    : Benjamin Kleynhans
-# Last Modified Date  : November 18, 2019
-# Filename            : general_connection_frame.py
+# Last Modified Date  : February 18, 2020
+# Filename            : com_port_frame.py
 #
 ###
 
@@ -17,23 +17,21 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from gui.forms.base_classes.gui_frame import Gui_Frame
+from gui.forms.base_classes.gui_label_frame import Gui_Label_Frame
 import pdb
 
-class General_Connection_Frame(Gui_Frame):
+class COM_Port_Frame(Gui_Label_Frame):
 
     # connection Frame constructor
     def __init__(self, master):
 
-        Gui_Frame.__init__(self, master, "general_connection_frame")
+        Gui_Label_Frame.__init__(self, master, "com_port_frame", "COM")
 
-        self.create_connection_frame(master)
+        self.create_com_port_frame(master)
 
 
     # Create the actual frame as a separate window
-    def create_connection_frame(self, master):
-
-        #master.add(master.frames[self.frame_name], text = "general")
+    def create_com_port_frame(self, master):
 
         # Read in the scene id
         ttk.Label(
