@@ -23,8 +23,6 @@ class Mono750_Gui:
 
     def __init__(self, master):
 
-        self.master = master
-
         # Import gui paths
         from forms.main_window.menu_bar import Menu_Bar
         from forms.main_window.header_frame import Header_Frame
@@ -39,6 +37,25 @@ class Mono750_Gui:
 
         # Ensure the master frame cannot be detached from the main program
         master.option_add('*tearOff', False)
+
+        # Create a dictionary of preferences which will contain all the program settings
+        preferences = {
+            'connection': {
+                'interface': None,
+                'com': '07',
+                'gpib': {
+                    'pc_controller': 'gpib-00',
+                    '750_controller': 'gpib-03'
+                }
+            }
+        }
+        master.preferences = preferences
+
+        # Create a dictionary to track the root and current objects
+        obj_ref = {
+            'root': master,
+            'master': master
+        }
 
         # Create frame container to easily access frames from other ares in the gui
         frames = {}
