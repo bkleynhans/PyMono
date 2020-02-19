@@ -6,11 +6,11 @@
 # Module Description  : Creates the connection_notebook that exists on the connection Frame.  Also
 #                       handles all data input from the connection Frame
 # Created By          : Benjamin Kleynhans
-# Creation Date       : May 30, 2019
+# Creation Date       : February 15, 2020
 # Authors             : Benjamin Kleynhans
 #
 # Last Modified By    : Benjamin Kleynhans
-# Last Modified Date  : October 30, 2019
+# Last Modified Date  : February 18, 2020
 # Filename            : connection_notebook.py
 #
 ###
@@ -20,7 +20,9 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
 from gui.forms.base_classes.gui_notebook import Gui_Notebook
-from gui.forms.preferences.connection_module.connection_frame.connection_sub_frames.general_connection_frame import General_Connection_Frame
+from gui.forms.preferences.connection_module.connection_frame.connection_sub_frames.interface_frame import Interface_Frame
+from gui.forms.preferences.connection_module.connection_frame.connection_sub_frames.com_port_frame import COM_Port_Frame
+from gui.forms.preferences.connection_module.connection_frame.connection_sub_frames.gpib_address_frame import GPIB_Address_Frame
 import pdb
 
 class Connection_Notebook(Gui_Notebook):
@@ -28,26 +30,7 @@ class Connection_Notebook(Gui_Notebook):
     # Connection Notebook constructor
     def __init__(self, master):
 
-        # Preferences
-        self.preferences = {
-                    'general': {
-                            'clean_folders': 'False',
-                            'folder_size': '500'},
-                    'scene_id': '',
-                    'date_frame_container': {
-                        'frame': '',
-                        'date_picker': '',
-                        'date_label': '',
-                        'date': ''},
-                    'lat': '',
-                    'lon': '',
-                    'surface_temp': ''
-            }
-
         Gui_Notebook.__init__(self, master, "connection_notebook")
-
-        # Add local preferences dictionary to the object
-        master.notebooks[self.notebook_name].preferences = self.preferences
 
         self.create_connection_notebook(master)
 
@@ -55,7 +38,13 @@ class Connection_Notebook(Gui_Notebook):
     # Create the connection_notebook object that will contain all the tabs
     def create_connection_notebook(self, master):
 
-        # Add the General frame to the notebook
-        General_Connection_Frame(master.notebooks[self.notebook_name])
+        # Add the Interface Frame to the notebook
+        Interface_Frame(master.notebooks[self.notebook_name])
+
+        # Add the COM port Frame to the notebook
+        COM_Port_Frame(master.notebooks[self.notebook_name])
+
+        # Add the GPIB Address Frame to the notebook
+        GPIB_Address_Frame(master.notebooks[self.notebook_name])
 
         master.notebooks[self.notebook_name].pack(anchor = 'w', fill = BOTH, expand = True, padx = 10, pady = 10)
