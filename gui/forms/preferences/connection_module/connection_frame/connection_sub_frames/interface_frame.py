@@ -63,8 +63,6 @@ class Interface_Frame(Gui_Label_Frame):
         master.frames[self.frame_name].pack(padx = 10, pady = (20, 0))
         # master.frames[self.frame_name].pack(anchor = 'w', fill = BOTH, expand = True, padx = 10, pady = 10)
 
-    def toggle_active_connection(self, master, selection):
+    def toggle_active_selection(self, master, selection):
 
-        pdb.set_trace()
-
-        master.master.master.master.preferences['connection']['interface'] = selection.get()
+        master.master.master.preferences['connection']['interface'] = selection.get()

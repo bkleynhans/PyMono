@@ -19,6 +19,9 @@ from tkinter import ttk
 from tkinter import messagebox
 from gui.forms.base_classes.gui_label_frame import Gui_Label_Frame
 from gui.forms.preferences.connection_module.connection_frame.connection_notebook import Connection_Notebook
+from gui.forms.preferences.connection_module.connection_frame.connection_sub_frames.interface_frame import Interface_Frame
+from gui.forms.preferences.connection_module.connection_frame.connection_sub_frames.com_port_frame import COM_Port_Frame
+from gui.forms.preferences.connection_module.connection_frame.connection_sub_frames.gpib_address_frame import GPIB_Address_Frame
 import pdb
 
 class Connection_Frame(Gui_Label_Frame):
@@ -33,7 +36,16 @@ class Connection_Frame(Gui_Label_Frame):
     # Create the actual frame as a separate window
     def create_connection_frame(self, master):
 
-        # Add the connection notebook to the frame
-        Connection_Notebook(master.frames[self.frame_name])
+        # # Add the connection notebook to the frame
+        # Connection_Notebook(master.frames[self.frame_name])
+
+        # Add the Interface Frame to the notebook
+        Interface_Frame(master.frames[self.frame_name])
+
+        # Add the COM port Frame to the notebook
+        COM_Port_Frame(master.frames[self.frame_name])
+
+        # Add the GPIB Address Frame to the notebook
+        GPIB_Address_Frame(master.frames[self.frame_name])
 
         master.frames[self.frame_name].pack(anchor = 'w', fill = BOTH, expand = True, padx = 10, pady = 10)
