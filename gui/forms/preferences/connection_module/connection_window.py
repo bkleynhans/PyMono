@@ -33,17 +33,23 @@ class Connection_Window(Gui_Window):
     # Create the actual window as a separate window
     def create_connection_window(self, master):
 
-        master.windows[self.window_name].protocol("WM_DELETE_WINDOW", lambda: self.on_closing(master))
-
         # Add the connection frame to the window
         Connection_Frame(master.windows[self.window_name])
+
+        close_button = ttk.Button(
+            master.windows[self.window_name],
+            text = "Close",
+            command = lambda: self.on_closing(master))
+        close_button.pack(side=RIGHT, padx=(0, 10), pady=(5, 20))
+
+        master.windows[self.window_name].protocol("WM_DELETE_WINDOW", lambda: self.on_closing(master))
 
 
     # Save changes made to connection
     def save_changes(self, master):
 
-        pass
-        master.windows[self.window_name].destroy()
+        self.quit()
+
 
     # Action to perform when connection window is closed
     def on_closing(self, master):

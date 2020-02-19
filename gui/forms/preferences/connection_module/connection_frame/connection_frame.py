@@ -47,4 +47,4 @@ class Connection_Frame(Gui_Label_Frame):
         # Add the GPIB Address Frame to the notebook
         GPIB_Address_Frame(master.frames[self.frame_name])
 
-        master.frames[self.frame_name].pack(anchor = 'w', fill = BOTH, expand = True, padx = 10, pady = 10)
+        master.frames[self.frame_name].pack(anchor='w', fill=BOTH, expand=True, padx=10, pady=10)

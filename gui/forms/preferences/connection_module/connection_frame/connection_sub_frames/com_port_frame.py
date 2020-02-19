@@ -27,25 +27,32 @@ class COM_Port_Frame(Gui_Label_Frame):
 
         Gui_Label_Frame.__init__(self, master, "com_port_frame", "COM")
 
+        self.master = master
+
         self.create_com_port_frame(master)
 
 
     # Create the actual frame as a separate window
     def create_com_port_frame(self, master):
 
-        # # Read in the scene id
-        # ttk.Label(
-        #     master.frames[self.frame_name],
-        #     text = 'Clean Folders : ',
-        #     width = 20).grid(
-        #         row = 0,
-        #         column = 0,
-        #         padx = 10,
-        #         pady = 10,
-        #         sticky = 'w'
-        #     )
+        labelTop = ttk.Label(master.frames[self.frame_name], text = "(1 to 15)")
+        labelTop.grid(column = 0, row = 0)
 
-        # master.master.master.master.preferences['general']['clean_folders'] = ttk.Entry(master.frames[self.frame_name], width = 30)
-        # master.master.master.master.preferences['general']['clean_folders'].grid(row = 0, column = 1, padx = 10, pady = 10, sticky = 'e')
+        port_combobox = ttk.Combobox(
+            master.frames[self.frame_name],
+            values = [
+                "COM01", "COM02", "COM03", "COM04", "COM05", "COM06", "COM07", "COM08",
+                "COM09", "COM10", "COM11", "COM12", "COM13", "COM14", "COM15"
+            ]
+        )
+        port_combobox.grid(column = 0, row = 1)
+        port_combobox.current(6)
 
-        master.frames[self.frame_name].pack(anchor = 'w', fill = BOTH, expand = True, padx = 10, pady = 10)
+        port_combobox.bind("<<ComboboxSelected>>", self.update_selection)
+
+        master.frames[self.frame_name].pack(side=LEFT, fill=BOTH, expand=True, anchor = 'w', padx = 10, pady = (20, 20))
+
+
+    def update_selection(self, event):
+
+        self.master.master.master.preferences['connection']['com'] = event.widget.get()

@@ -59,9 +59,8 @@ class Interface_Frame(Gui_Label_Frame):
                         row = 0,
                         column = 1)
 
+        master.frames[self.frame_name].pack(side=TOP, fill=BOTH, expand=True, anchor = 'w', padx = 10, pady = (20, 0))
 
-        master.frames[self.frame_name].pack(padx = 10, pady = (20, 0))
-        # master.frames[self.frame_name].pack(anchor = 'w', fill = BOTH, expand = True, padx = 10, pady = 10)
 
     def toggle_active_selection(self, master, selection):
 
