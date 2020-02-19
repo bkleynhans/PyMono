@@ -18,7 +18,6 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from gui.forms.base_classes.gui_label_frame import Gui_Label_Frame
-from gui.forms.preferences.connection_module.connection_frame.connection_notebook import Connection_Notebook
 from gui.forms.preferences.connection_module.connection_frame.connection_sub_frames.interface_frame import Interface_Frame
 from gui.forms.preferences.connection_module.connection_frame.connection_sub_frames.com_port_frame import COM_Port_Frame
 from gui.forms.preferences.connection_module.connection_frame.connection_sub_frames.gpib_address_frame import GPIB_Address_Frame
