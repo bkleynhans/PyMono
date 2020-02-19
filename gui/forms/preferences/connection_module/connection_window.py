@@ -9,7 +9,7 @@
 #
 # Last Modified By    : Benjamin Kleynhans
 # Last Modified Date  : November 18, 2019
-# Filename            : settings_window.py
+# Filename            : connection_window.py
 #
 ###
 
@@ -18,37 +18,37 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from gui.forms.base_classes.gui_window import Gui_Window
-from gui.forms.settings.settings_frame import Settings_Frame
+from gui.forms.preferences.connection_module.connection_frame.connection_frame import Connection_Frame
 import pdb
 
-class Settings_Window(Gui_Window):    
-    
-    # Settings Window constructor
+class Connection_Window(Gui_Window):
+
+    # connection Window constructor
     def __init__(self, master):
-        
-        Gui_Window.__init__(self, master, "settings_window", "Settings")
-        self.create_settings_window(master)
-        
-    
+
+        Gui_Window.__init__(self, master, "connection_window", "Connection")
+        self.create_connection_window(master)
+
+
     # Create the actual window as a separate window
-    def create_settings_window(self, master):
-        
+    def create_connection_window(self, master):
+
         master.windows[self.window_name].protocol("WM_DELETE_WINDOW", lambda: self.on_closing(master))
 
-        # Add the settings frame to the window
-        Settings_Frame(master.windows[self.window_name])
-        
+        # Add the connection frame to the window
+        Connection_Frame(master.windows[self.window_name])
 
-    # Save changes made to settings
-    def save_changes(self):
-        
+
+    # Save changes made to connection
+    def save_changes(self, master):
+
         pass
+        master.windows[self.window_name].destroy()
 
-
-    # Action to perform when settings window is closed
+    # Action to perform when connection window is closed
     def on_closing(self, master):
-    
+
         if messagebox.askyesno("Save Preferences", "Do you wish to save your changes?"):
-            self.save_changes
+            self.save_changes(master)
         else:
             master.windows[self.window_name].destroy()

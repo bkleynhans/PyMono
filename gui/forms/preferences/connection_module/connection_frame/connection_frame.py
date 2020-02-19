@@ -9,7 +9,7 @@
 #
 # Last Modified By    : Benjamin Kleynhans
 # Last Modified Date  : October 30, 2019
-# Filename            : settings_frame.py
+# Filename            : connection_frame.py
 #
 ###
 
@@ -18,23 +18,22 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from gui.forms.base_classes.gui_label_frame import Gui_Label_Frame
-from gui.forms.settings.settings_notebook import Settings_Notebook
+from gui.forms.preferences.connection_module.connection_frame.connection_notebook import Connection_Notebook
 import pdb
 
-class Settings_Frame(Gui_Label_Frame):
-    
-    # Settings Frame constructor
+class Connection_Frame(Gui_Label_Frame):
+
+    # connection Frame constructor
     def __init__(self, master):
-        
-        Gui_Label_Frame.__init__(self, master, "settings_frame", "Settings")
-        self.create_settings_frame(master)
-        
-    
+
+        Gui_Label_Frame.__init__(self, master, "connection_frame", "Connection")
+        self.create_connection_frame(master)
+
+
     # Create the actual frame as a separate window
-    def create_settings_frame(self, master):
-        
+    def create_connection_frame(self, master):
+
         master.frames[self.frame_name].pack(anchor = 'w', fill = BOTH, expand = True, padx = 10, pady = 10)
-        
-        # Add the settings notebook to the frame
-        Settings_Notebook(master.frames[self.frame_name])
-        
+
+        # Add the connection notebook to the frame
+        Connection_Notebook(master.frames[self.frame_name])
