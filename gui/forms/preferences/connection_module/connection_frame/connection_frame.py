@@ -4,11 +4,11 @@
 #
 # Program Description : GUI for the Landsat Buoy Calibration program
 # Created By          : Benjamin Kleynhans
-# Creation Date       : May 30, 2019
+# Creation Date       : February 18, 2020
 # Authors             : Benjamin Kleynhans
 #
 # Last Modified By    : Benjamin Kleynhans
-# Last Modified Date  : October 30, 2019
+# Last Modified Date  : February 18, 2020
 # Filename            : connection_frame.py
 #
 ###
@@ -26,7 +26,7 @@ class Connection_Frame(Gui_Label_Frame):
     # connection Frame constructor
     def __init__(self, master):
 
-        Gui_Label_Frame.__init__(self, master, "connection_frame", "Connection")
+        Gui_Label_Frame.__init__(self, master, "connection_frame", "OL-750 Connection Properties")
         self.create_connection_frame(master)
 
 
