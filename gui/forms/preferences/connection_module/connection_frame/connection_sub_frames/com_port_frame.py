@@ -33,19 +33,19 @@ class COM_Port_Frame(Gui_Label_Frame):
     # Create the actual frame as a separate window
     def create_com_port_frame(self, master):
 
-        # Read in the scene id
-        ttk.Label(
-            master.frames[self.frame_name],
-            text = 'Clean Folders : ',
-            width = 20).grid(
-                row = 0,
-                column = 0,
-                padx = 10,
-                pady = 10,
-                sticky = 'w'
-            )
+        # # Read in the scene id
+        # ttk.Label(
+        #     master.frames[self.frame_name],
+        #     text = 'Clean Folders : ',
+        #     width = 20).grid(
+        #         row = 0,
+        #         column = 0,
+        #         padx = 10,
+        #         pady = 10,
+        #         sticky = 'w'
+        #     )
 
-        master.preferences['general']['clean_folders'] = ttk.Entry(master.frames[self.frame_name], width = 30)
-        master.preferences['general']['clean_folders'].grid(row = 0, column = 1, padx = 10, pady = 10, sticky = 'e')
+        # master.master.master.master.preferences['general']['clean_folders'] = ttk.Entry(master.frames[self.frame_name], width = 30)
+        # master.master.master.master.preferences['general']['clean_folders'].grid(row = 0, column = 1, padx = 10, pady = 10, sticky = 'e')
 
         master.frames[self.frame_name].pack(anchor = 'w', fill = BOTH, expand = True, padx = 10, pady = 10)

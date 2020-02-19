@@ -33,31 +33,31 @@ class Interface_Frame(Gui_Label_Frame):
     # Create the actual frame as a separate window
     def create_interface_frame(self, master):
 
-        pdb.set_trace()
-
-        master.preferences['connection']['interface'] = StringVar()
+        self.interface_selection = StringVar()
+        self.interface_selection.set('serial')
 
         # Add Radio button for Serial connection
         ttk.Radiobutton(
                 master.frames[self.frame_name],
                 text = 'Serial',
-                variable = master.preferences['connection']['interface'],
+                variable = self.interface_selection,
                 value = 'serial',
                 width = 10,
-                command = lambda: self.toggle_active_selection(master, master.preferences['connection']['interface'])).grid(
+                command = lambda: self.toggle_active_selection(master, self.interface_selection)).grid(
                         row = 0,
-                        column = 0)
+                        column = 0
+        )
 
         # Add Radio button for GPIB connection
         ttk.Radiobutton(
                 master.frames[self.frame_name],
                 text = 'GPIB',
-                variable = master.preferences['connection']['interface'],
+                variable = self.interface_selection,
                 value = 'gpib',
                 width = 10,
-                command = lambda: self.toggle_active_selection(master, master.preferences['connection']['interface'])).grid(
+                command = lambda: self.toggle_active_selection(master, self.interface_selection)).grid(
                         row = 0,
-                        column = 0)
+                        column = 1)
 
 
         master.frames[self.frame_name].pack(padx = 10, pady = (20, 0))
@@ -65,4 +65,6 @@ class Interface_Frame(Gui_Label_Frame):
 
     def toggle_active_connection(self, master, selection):
 
-        pass
+        pdb.set_trace()
+
+        master.master.master.master.preferences['connection']['interface'] = selection.get()

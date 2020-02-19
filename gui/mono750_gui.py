@@ -51,12 +51,6 @@ class Mono750_Gui:
         }
         master.preferences = preferences
 
-        # Create a dictionary to track the root and current objects
-        obj_ref = {
-            'root': master,
-            'master': master
-        }
-
         # Create frame container to easily access frames from other ares in the gui
         frames = {}
         master.frames = frames

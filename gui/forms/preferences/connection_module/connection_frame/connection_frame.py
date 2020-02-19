@@ -33,7 +33,7 @@ class Connection_Frame(Gui_Label_Frame):
     # Create the actual frame as a separate window
     def create_connection_frame(self, master):
 
-        master.frames[self.frame_name].pack(anchor = 'w', fill = BOTH, expand = True, padx = 10, pady = 10)
-
         # Add the connection notebook to the frame
         Connection_Notebook(master.frames[self.frame_name])
+
+        master.frames[self.frame_name].pack(anchor = 'w', fill = BOTH, expand = True, padx = 10, pady = 10)
