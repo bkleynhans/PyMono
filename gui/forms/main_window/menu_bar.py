@@ -18,7 +18,7 @@ from tkinter import *
 from tkinter import ttk
 from gui import mono750_gui
 from gui.forms.main_window.help_menu import Help_Menu
-from gui.forms.Preferences.Preferences_window import Preferences_Window
+from gui.forms.preferences.connection_module.connection_window import Connection_Window
 
 
 class Menu_Bar():
@@ -49,10 +49,8 @@ class Menu_Bar():
         self.file_menu.add_command(label = 'Exit', command = lambda: mono750_gui.on_closing(master))
         self.file_menu.entryconfig('Exit', accelerator = 'Ctrl+Q')
 
-        # Define the Edit menu options - !!! The edit menu has been disabled as it has not been fully implemented
-        self.edit_menu.add_command(label = 'Preferences', command = lambda: Preferences_Window(master))
+        # Define the Edit menu options
+        self.edit_menu.add_command(label = 'Preferences', command = lambda: Connection_Window(master))
 
         # Define the Help menu options
-        self.menu_bar.add_command(
-                label = 'Help',
-                command = lambda: Help_Menu(master)) # Open the readme file on the GitHub page for the project
+        self.menu_bar.add_command(label = 'Help', command = lambda: Help_Menu(master)) # Open the readme file on the GitHub page for the project
