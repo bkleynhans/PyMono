@@ -69,7 +69,7 @@ def main(args):
 
     __PROJECT_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
-    sp.call('clear', shell = True)
+    # sp.call('clear', shell = True)
 
     set_path_variables()
 
@@ -78,7 +78,7 @@ def main(args):
     # ol750 = Ol750_420_Python_Api(args)
     mono750_gui.main(__PROJECT_ROOT)
 
-    sp.call('clear', shell = True)
+    # sp.call('clear', shell = True)
 
 
 if __name__ == '__main__':
