@@ -15,6 +15,8 @@
 ###
 
 # Imports
+import json
+
 from tkinter import *
 from tkinter import messagebox
 
@@ -45,7 +47,7 @@ class Mono750_Gui:
                 'com': '07',
                 'gpib': {
                     'pc_controller': 'gpib-00',
-                    '750_controller': 'gpib-03'
+                    '750_device': 'gpib-03'
                 }
             }
         }
