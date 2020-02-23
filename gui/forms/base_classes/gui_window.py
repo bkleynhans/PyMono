@@ -1,6 +1,6 @@
 ###
 #
-# CIS Top of Atmosphere Radiance Calibration
+#
 #
 # Program Description : Base class for all Windows in the GUI
 # Created By          : Benjamin Kleynhans
@@ -21,16 +21,18 @@ from tkinter import ttk
 class Gui_Window():
 
     # Settings Window constructor
-    def __init__(self, master, window_name, window_title):
+    def __init__(self, root, master, window_name, window_title):
+
+        self.root = root
 
         self.window_name = window_name
         self.window_title = window_title
 
-        self.create_gui_window(master)
+        self.create_gui_window(root, master)
 
 
     # Create the actual window as a separate window
-    def create_gui_window(self, master):
+    def create_gui_window(self, root, master):
 
         self.gui_window = Toplevel(master)
 
@@ -46,4 +48,17 @@ class Gui_Window():
         self.widgets = {}
         self.gui_window.widgets = self.widgets
 
+         # Create widgets container to easily access widgets from other areas in the gui
+        self.canvases = {}
+        self.gui_window.canvases = self.canvases
+
+        # Create toolbar container to easily access toolbars from other areas in the gui
+        self.toolbars = {}
+        self.gui_window.toolbars = self.toolbars
+
+        # Create window container to easily access windows from other areas in the gui
+        self.windows = {}
+        self.gui_window.windows = self.windows
+
+        root.windows[self.window_name] = self.gui_window
         master.windows[self.window_name] = self.gui_window
