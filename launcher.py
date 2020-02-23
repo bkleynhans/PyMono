@@ -1,9 +1,8 @@
 ###
 #
-# Entry file for 3D Math using Python and PyGame
 #
-# Program Description : This is the launcher file which initiates the OpenGL
-#   renderer window.
+#
+# Program Description :
 # Created By          : Benjamin Kleynhans
 # Creation Date       : January 25, 2020
 # Authors             : Benjamin Kleynhans
@@ -44,9 +43,17 @@ def set_path_variables():
 
     sys.path.append(path)
 
+    op_sys = None
+    delimeter = None
+
     # Automatically build the path
     for element in os.walk(path):
         if ('/' in element[0]):
+            if (op_sys == None):
+                op_sys = 'ux'
+                delimeter = '/'
+
+
             ind = element[0].rindex('/')
             index_value = element[0][ind + 1]
 
@@ -55,12 +62,18 @@ def set_path_variables():
                 sys.path.append(element[0])
 
         elif ('\\' in element[0]):
+            if (op_sys == None):
+                op_sys = 'win'
+                delimeter = '\\'
+
             ind = element[0].rindex('\\')
             index_value = element[0][ind + 1]
 
             # If the directory does not start with a '_' or a '.' append it to the path
             if (index_value != '_') and (index_value != '.'):
                 sys.path.append(element[0])
+
+    return op_sys, delimeter
 
 
 def main(args):
@@ -71,12 +84,15 @@ def main(args):
 
     # sp.call('clear', shell = True)
 
-    set_path_variables()
+    op_sys, delimeter = set_path_variables()
 
-    # args = {'project_root' : __PROJECT_ROOT}
+    args = {
+        'project_root': __PROJECT_ROOT,
+        'os': op_sys,
+        'delimeter': delimeter
+    }
 
-    # ol750 = Ol750_420_Python_Api(args)
-    mono750_gui.main(__PROJECT_ROOT)
+    mono750_gui.main(__PROJECT_ROOT, args)
 
     # sp.call('clear', shell = True)
 

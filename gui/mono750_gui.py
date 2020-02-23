@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 ###
 #
-# CIS Top of Atmosphere Radiance Calibration
 #
-# Program Description : GUI master for the Landsat Buoy Calibration program
+#
+# Program Description :
 # Created By          : Benjamin Kleynhans
 # Creation Date       : May 23, 2019
 # Authors             : Benjamin Kleynhans
@@ -16,17 +16,23 @@
 
 # Imports
 import json
+import os
 
 from tkinter import *
 from tkinter import messagebox
 
+from lib.ol750_420_python_api import Ol750_420_Python_Api
+
 
 class Mono750_Gui:
 
-    def __init__(self, master):
+    def __init__(self, master, args):
+
+        self.root = master
 
         # Import gui paths
         from forms.main_window.menu_bar import Menu_Bar
+        from forms.main_window.main_toolbar import Main_Toolbar
         from forms.main_window.header_frame import Header_Frame
         # from forms.main_window.input_module.input_frame import Input_Frame
         # from forms.main_window.status_module.status_frame import Status_Frame
@@ -43,29 +49,55 @@ class Mono750_Gui:
         # Create a dictionary of preferences which will contain all the program settings
         preferences = {
             'connection': {
-                'interface': None,
+                'interface': 'serial',
                 'com': '07',
                 'gpib': {
                     'pc_controller': 'gpib-00',
                     '750_device': 'gpib-03'
                 }
-            }
+            },
+            'os_details': {
+                'os': args['os'],
+            },
+            'project_root': args['project_root']
         }
         master.preferences = preferences
 
-        # Create frame container to easily access frames from other ares in the gui
+        # Create notebook container to easily access notebooks from other areas in the gui
+        notebooks = {}
+        master.notebooks = notebooks
+
+        # Create frame container to easily access frames from other areas in the gui
         frames = {}
         master.frames = frames
 
-        # Create window container to easily access windows from other ares in the gui
+        # Create widgets container to easily access widgets from other areas in the gui
+        widgets = {}
+        master.widgets = widgets
+
+         # Create widgets container to easily access widgets from other areas in the gui
+        canvases = {}
+        master.canvases = canvases
+
+        # Create toolbar container to easily access toolbars from other areas in the gui
+        toolbars = {}
+        master.toolbars = toolbars
+
+        # Create window container to easily access windows from other areas in the gui
         windows = {}
         master.windows = windows
 
         # Create the Menubar - accessed via master.menu_bar
-        Menu_Bar(master)
+        Menu_Bar(self.root, master)
+
+        # Create the Toolbar - accessed via master.menu_bar
+        Main_Toolbar(self.root, master)
 
         # Create the Header - accessed via master.header_frame
-        Header_Frame(master)
+        Header_Frame(self.root, master)
+
+        # Connect to the OL750 API
+        ol750 = Ol750_420_Python_Api(args)
 
 
 # Ask the user to confirm if they want to close the program
@@ -77,12 +109,14 @@ def on_closing(root):
 
 
 # Main entry to the GUI program
-def main(project_root):
+def main(project_root, args):
 
     root = Tk()
     root.project_root = project_root
+
+    args['project_root'] = project_root
     # root.protocol("WM_DELETE_WINDOW", lambda: on_closing(root))
 
-    mono750_gui = Mono750_Gui(root)
+    mono750_gui = Mono750_Gui(root, args)
 
     root.mainloop()
