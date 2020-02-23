@@ -1,8 +1,8 @@
 ###
 #
-# CIS Top of Atmosphere Radiance Calibration
 #
-# Program Description : Menu bar for the GUI of the Landsat Buoy Calibration program
+#
+# Program Description :
 # Created By          : Benjamin Kleynhans
 # Creation Date       : May 23, 2019
 # Authors             : Benjamin Kleynhans
@@ -18,13 +18,15 @@ from tkinter import *
 from tkinter import ttk
 from gui import mono750_gui
 from gui.forms.main_window.help_menu import Help_Menu
-from gui.forms.preferences.connection_module.connection_window import Connection_Window
+from gui.forms.modules.preferences.connection_module.connection_window import Connection_Window
 
 
 class Menu_Bar():
 
     # Menu Bar constructor
-    def __init__(self, master):
+    def __init__(self, root, master):
+
+        self.root = root
 
         self.create_menu_bar(master)
 
@@ -50,7 +52,7 @@ class Menu_Bar():
         self.file_menu.entryconfig('Exit', accelerator = 'Ctrl+Q')
 
         # Define the Edit menu options
-        self.edit_menu.add_command(label = 'Preferences', command = lambda: Connection_Window(master))
+        self.edit_menu.add_command(label = 'Preferences', command = lambda: Connection_Window(self.root, master))
 
         # Define the Help menu options
         self.menu_bar.add_command(label = 'Help', command = lambda: Help_Menu(master)) # Open the readme file on the GitHub page for the project
