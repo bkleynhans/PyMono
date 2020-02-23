@@ -1,8 +1,8 @@
 ###
 #
-# CIS Top of Atmosphere Radiance Calibration
 #
-# Program Description : GUI for the Landsat Buoy Calibration program
+#
+# Program Description :
 # Created By          : Benjamin Kleynhans
 # Creation Date       : May 28, 2019
 # Authors             : Benjamin Kleynhans
@@ -24,7 +24,7 @@ from tkcalendar import DateEntry
 from datetime import date
 
 class MyDateEntry(DateEntry):
-    
+
     def __init__(self, master=None, **kw):
         #DateEntry.__init__(self, master=None, **kw)
         self.this_calendar = DateEntry()#.__init__(self, master = None, **kw)
@@ -38,7 +38,7 @@ class MyDateEntry(DateEntry):
                 text='Today: %s' % date.today().strftime('%x'))
         date_label.pack(fill='x')
         date_label.bind("<Button-1>", lambda e : self.this_calendar.set_date(date.today()))
-        
+
 
 root = Tk()
 # change ttk theme to 'clam' to fix issue with downarrow button
