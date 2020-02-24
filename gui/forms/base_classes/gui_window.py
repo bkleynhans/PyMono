@@ -28,11 +28,11 @@ class Gui_Window():
         self.window_name = window_name
         self.window_title = window_title
 
-        self.create_gui_window(root, master)
+        self.create_gui_window(master)
 
 
     # Create the actual window as a separate window
-    def create_gui_window(self, root, master):
+    def create_gui_window(self, master):
 
         self.gui_window = Toplevel(master)
 
@@ -60,5 +60,5 @@ class Gui_Window():
         self.windows = {}
         self.gui_window.windows = self.windows
 
-        root.windows[self.window_name] = self.gui_window
+        self.root.windows[self.window_name] = self.gui_window
         master.windows[self.window_name] = self.gui_window

@@ -27,11 +27,11 @@ class Gui_Notebook():
 
         self.notebook_name = notebook_name
 
-        self.create_gui_notebook(root, master)
+        self.create_gui_notebook(master)
 
 
     # Create the actual Frame
-    def create_gui_notebook(self, root, master):
+    def create_gui_notebook(self, master):
 
         self.gui_notebook = ttk.Notebook(master)
 
@@ -59,5 +59,5 @@ class Gui_Notebook():
         self.windows = {}
         self.gui_notebook.windows = self.windows
 
-        root.notebooks[self.notebook_name] = self.gui_notebook
+        self.root.notebooks[self.notebook_name] = self.gui_notebook
         master.notebooks[self.notebook_name] = self.gui_notebook

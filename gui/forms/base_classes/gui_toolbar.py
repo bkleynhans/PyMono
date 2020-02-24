@@ -27,11 +27,11 @@ class Gui_Toolbar():
 
         self.toolbar_name = toolbar_name
 
-        self.create_gui_toolbar(root, master)
+        self.create_gui_toolbar(master)
 
 
     # Create the actual Canvas
-    def create_gui_toolbar(self, root, master):
+    def create_gui_toolbar(self, master):
 
         self.gui_toolbar = ttk.Frame(master, borderwidth=1, relief=RAISED)
 
@@ -59,5 +59,5 @@ class Gui_Toolbar():
         self.windows = {}
         self.gui_toolbar.windows = self.windows
 
-        root.toolbars[self.toolbar_name] = self.gui_toolbar
+        self.root.toolbars[self.toolbar_name] = self.gui_toolbar
         master.toolbars[self.toolbar_name] = self.gui_toolbar

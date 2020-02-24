@@ -28,11 +28,11 @@ class Gui_Label_Frame():
         self.frame_name = frame_name
         self.frame_title = frame_title
 
-        self.create_gui_label_frame(root, master)
+        self.create_gui_label_frame(master)
 
 
     # Create the actual Frame
-    def create_gui_label_frame(self, root, master):
+    def create_gui_label_frame(self, master):
 
         self.gui_label_frame = ttk.LabelFrame(master, text = self.frame_title)
 
@@ -60,5 +60,5 @@ class Gui_Label_Frame():
         self.windows = {}
         self.gui_label_frame.windows = self.windows
 
-        root.frames[self.frame_name] = self.gui_label_frame
+        self.root.frames[self.frame_name] = self.gui_label_frame
         master.frames[self.frame_name] = self.gui_label_frame

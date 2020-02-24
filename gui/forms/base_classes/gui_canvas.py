@@ -27,11 +27,11 @@ class Gui_Canvas():
 
         self.canvas_name = canvas_name
 
-        self.create_gui_canvas(root, master)
+        self.create_gui_canvas(master)
 
 
     # Create the actual Canvas
-    def create_gui_canvas(self, root, master):
+    def create_gui_canvas(self, master):
 
         self.gui_canvas = Canvas(master, width=450, height=300, bg="white")
 
@@ -59,5 +59,5 @@ class Gui_Canvas():
         self.windows = {}
         self.gui_canvas.windows = self.windows
 
-        root.canvases[self.canvas_name] = self.gui_canvas
+        self.root.canvases[self.canvas_name] = self.gui_canvas
         master.canvases[self.canvas_name] = self.gui_canvas

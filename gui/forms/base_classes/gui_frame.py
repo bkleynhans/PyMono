@@ -27,11 +27,11 @@ class Gui_Frame():
 
         self.frame_name = frame_name
 
-        self.create_gui_frame(root, master)
+        self.create_gui_frame(master)
 
 
     # Create the actual Frame
-    def create_gui_frame(self, root, master):
+    def create_gui_frame(self, master):
 
         self.gui_frame = ttk.Frame(master)
 
@@ -59,5 +59,5 @@ class Gui_Frame():
         self.windows = {}
         self.gui_frame.windows = self.windows
 
-        root.frames[self.frame_name] = self.gui_frame
+        self.root.frames[self.frame_name] = self.gui_frame
         master.frames[self.frame_name] = self.gui_frame
