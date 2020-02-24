@@ -18,7 +18,8 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from gui.forms.base_classes.gui_label_frame import Gui_Label_Frame
-from gui.forms.modules.sample.sample_frame.sample_notebooks.sample_notebook import Sample_Notebook
+# from gui.forms.modules.sample.sample_frame.sample_notebooks.sample_notebook import Sample_Notebook
+from gui.forms.modules.sample.sample_frame.sample_notebooks.sample_sub_frames.sample1_frame import Sample1_Frame
 import pdb
 
 class Sample_Frame(Gui_Label_Frame):
@@ -33,10 +34,10 @@ class Sample_Frame(Gui_Label_Frame):
     # Create the actual frame as a separate window
     def create_sample_frame(self, master):
 
-        # Add the sample notebook to the frame
-        Sample_Notebook(self.root, master.frames[self.frame_name])
+        # # Add the sample notebook to the frame
+        # Sample_Notebook(self.root, master.frames[self.frame_name])
 
-        # Add the sample notebook to the frame
-        Sample_Notebook(self.root, master.frames[self.frame_name])
+        # Add the sample subframe to the sample frame
+        Sample1_Frame(self.root, master.frames[self.frame_name])
 
-        master.frames[self.frame_name].pack(anchor = 'w', fill = BOTH, expand = True, padx = 10, pady = 10)
+        master.frames[self.frame_name].pack(anchor='w', fill=BOTH, expand=True, padx=10, pady=10)

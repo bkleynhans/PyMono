@@ -63,6 +63,17 @@ class Mono750_Gui:
         }
         master.preferences = preferences
 
+        # Create a dictionary to contain all the custom user settings
+        user_options = {
+            'sample1_frame': {
+                'starting_wavelength': '',
+                'ending_wavelength': '',
+                'change_in_wavelength': '',
+                'time_between_wavelengths': ''
+            }
+        }
+        master.user_options = user_options
+
         # Create notebook container to easily access notebooks from other areas in the gui
         notebooks = {}
         master.notebooks = notebooks
