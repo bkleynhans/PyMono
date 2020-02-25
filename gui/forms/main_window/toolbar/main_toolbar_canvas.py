@@ -56,9 +56,11 @@ class Main_Toolbar_Canvas(Gui_Canvas):
     # Connect to OL750
     def connect_to_ol750(self, master):
 
-        self.change_color(master)
+        # self.change_color(master)
         try:
-            status = self.root.ol750.SerialOpen('com' + self.root.preferences['connection']['com'])
+            pdb.set_trace()
+            com_port = self.root.preferences['ol750']['connection']['com']
+            status = self.root.preferences['ol750']['obj'].SerialOpen(com_port)
 
             if status == 0:
                 self.change_color(master)
@@ -72,6 +74,7 @@ class Main_Toolbar_Canvas(Gui_Canvas):
         if self.button_color == "red":
             self.button_color = "green"
             print("green")
+            
         else:
             self.button_color = "red"
             print("red")
