@@ -48,13 +48,16 @@ class Mono750_Gui:
 
         # Create a dictionary of preferences which will contain all the program settings
         preferences = {
-            'status': 1,                            # Status 1 - not connected | Status 0 - connected
-            'connection': {
-                'interface': 'serial',
-                'com': '07',
-                'gpib': {
-                    'pc_controller': 'gpib-00',
-                    '750_device': 'gpib-03'
+            'ol750': {
+                'obj': None,
+                'status': 1,                            # Status 1 - not connected | Status 0 - connected
+                'connection': {
+                    'interface': 'serial',
+                    'com': '07',
+                    'gpib': {
+                        'pc_controller': 'gpib-00',
+                        '750_device': 'gpib-03'
+                    }
                 }
             },
             'os_details': {
@@ -110,6 +113,7 @@ class Mono750_Gui:
 
         # Connect to the OL750 API
         ol750 = Ol750_420_Python_Api(args)
+        master.preferences['ol750']['obj'] = ol750
 
 
 # Ask the user to confirm if they want to close the program
