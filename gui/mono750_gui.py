@@ -48,6 +48,7 @@ class Mono750_Gui:
 
         # Create a dictionary of preferences which will contain all the program settings
         preferences = {
+            'status': 1,                            # Status 1 - not connected | Status 0 - connected
             'connection': {
                 'interface': 'serial',
                 'com': '07',

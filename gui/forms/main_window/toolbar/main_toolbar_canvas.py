@@ -41,7 +41,7 @@ class Main_Toolbar_Canvas(Gui_Canvas):
         master.canvases[self.canvas_name].itemconfig(self.oval_connected, fill=self.button_color)
 
         # Add connection button
-        connect_button = Button(
+        connect_button = ttk.Button(
             master.canvases[self.canvas_name],
             text="Connect",
             command=lambda: self.connect_to_ol750(master)

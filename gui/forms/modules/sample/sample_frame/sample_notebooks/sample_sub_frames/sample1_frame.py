@@ -45,11 +45,11 @@ class Sample1_Frame(Gui_Label_Frame):
                 sticky = 'nsew'
             )
 
-        self.root.user_options[self.frame_name]['starting_wavelength'] = ttk.Entry(master.frames[self.frame_name], width = 80)
+        self.root.user_options[self.frame_name]['starting_wavelength'] = ttk.Entry(master.frames[self.frame_name], width = 20)
         self.root.user_options[self.frame_name]['starting_wavelength'].grid(
             row = 0,
             column = 1,
-            columnspan = 3,
+            # columnspan = 3,
             padx = 10,
             pady = 10,
             sticky = 'nsew'
@@ -67,11 +67,11 @@ class Sample1_Frame(Gui_Label_Frame):
                 sticky = 'nsew'
             )
 
-        self.root.user_options[self.frame_name]['ending_wavelength'] = ttk.Entry(master.frames[self.frame_name], width = 80)
+        self.root.user_options[self.frame_name]['ending_wavelength'] = ttk.Entry(master.frames[self.frame_name], width = 20)
         self.root.user_options[self.frame_name]['ending_wavelength'].grid(
             row = 1,
             column = 1,
-            columnspan = 3,
+            # columnspan = 3,
             padx = 10,
             pady = 10,
             sticky = 'nsew'
@@ -89,11 +89,11 @@ class Sample1_Frame(Gui_Label_Frame):
                 sticky = 'nsew'
             )
 
-        self.root.user_options[self.frame_name]['change_in_wavelength'] = ttk.Entry(master.frames[self.frame_name], width = 80)
+        self.root.user_options[self.frame_name]['change_in_wavelength'] = ttk.Entry(master.frames[self.frame_name], width = 20)
         self.root.user_options[self.frame_name]['change_in_wavelength'].grid(
             row = 2,
             column = 1,
-            columnspan = 3,
+            # columnspan = 3,
             padx = 10,
             pady = 10,
             sticky = 'nsew'
@@ -102,7 +102,7 @@ class Sample1_Frame(Gui_Label_Frame):
         # Read in the time of illumination
         ttk.Label(
             master.frames[self.frame_name],
-            text = u"\u0394 \u03bb", #unicode for lamda #unicode for delta u0394
+            text = u"\u0394 time", #unicode for lamda #unicode for delta u0394
             width = 20).grid(
                 row = 3,
                 column = 0,
@@ -111,12 +111,14 @@ class Sample1_Frame(Gui_Label_Frame):
                 sticky = 'nsew'
             )
 
-        self.root.user_options[self.frame_name]['time_between_wavelengths'] = ttk.Entry(master.frames[self.frame_name], width = 80)
+        self.root.user_options[self.frame_name]['time_between_wavelengths'] = ttk.Entry(master.frames[self.frame_name], width = 20)
         self.root.user_options[self.frame_name]['time_between_wavelengths'].grid(
             row = 3,
             column = 1,
-            columnspan = 3,
+            # columnspan = 3,
             padx = 10,
             pady = 10,
             sticky = 'nsew'
         )
+
+        master.frames[self.frame_name].pack(anchor = 'w', fill = BOTH, expand = True, padx = 10, pady = 10)
