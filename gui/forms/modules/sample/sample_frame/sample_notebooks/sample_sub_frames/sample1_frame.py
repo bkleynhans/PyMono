@@ -36,7 +36,7 @@ class Sample1_Frame(Gui_Label_Frame):
         # Read in the starting wavelength
         ttk.Label(
             master.frames[self.frame_name],
-            text = u"Starting \u03bb", #unicode for lamda
+            text = u"Starting \u03bb (nm)", #unicode for lamda
             width = 20).grid(
                 row = 0,
                 column = 0,
@@ -58,7 +58,7 @@ class Sample1_Frame(Gui_Label_Frame):
         # Read in the ending wavelength
         ttk.Label(
             master.frames[self.frame_name],
-            text = u"Ending \u03bb", #unicode for lamda
+            text = u"Ending \u03bb (nm)", #unicode for lamda
             width = 20).grid(
                 row = 1,
                 column = 0,
@@ -80,7 +80,7 @@ class Sample1_Frame(Gui_Label_Frame):
         # Read in the change in wavelength
         ttk.Label(
             master.frames[self.frame_name],
-            text = u"\u0394 \u03bb", #unicode for lamda #unicode for delta u0394
+            text = u"\u0394 \u03bb (nm)", #unicode for lamda #unicode for delta u0394
             width = 20).grid(
                 row = 2,
                 column = 0,
@@ -102,7 +102,7 @@ class Sample1_Frame(Gui_Label_Frame):
         # Read in the time of illumination
         ttk.Label(
             master.frames[self.frame_name],
-            text = u"\u0394 time", #unicode for lamda #unicode for delta u0394
+            text = u"\u0394 time (s)", #unicode for lamda #unicode for delta u0394
             width = 20).grid(
                 row = 3,
                 column = 0,
