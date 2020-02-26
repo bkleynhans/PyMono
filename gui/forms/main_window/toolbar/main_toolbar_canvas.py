@@ -41,24 +41,38 @@ class Main_Toolbar_Canvas(Gui_Canvas):
         master.canvases[self.canvas_name].itemconfig(self.oval_connected, fill=self.button_color)
 
         # Add connection button
-        connect_button = ttk.Button(
+        self.status_button = ttk.Button(
             master.canvases[self.canvas_name],
             text="Connect",
-            command=lambda: self.connect_to_ol750(master)
-            ).pack(
-                side=LEFT,
-                padx=(15, 0)
+            command=lambda: self.process_connect_disconnect_button(master)
+        )
+        self.status_button.pack(
+            side=LEFT,
+            padx=(15, 0)
         )
 
         master.canvases[self.canvas_name].pack(anchor='w', fill='both', expand=True)
 
 
-    # Connect to OL750
-    def connect_to_ol750(self, master):
+    # Process the Connect/Disconnect button operation
+    def process_connect_disconnect_button(self, master):
 
-        # self.change_color(master)
+        if self.status_button['text'] == "Connect":
+            self.status_button['text'] = "Disconnect"
+
+            self.close_connection(master)
+        else:
+            self.status_button['text'] = "Connect"
+
+            self.open_connection(master)
+
+
+    # Open connection to OL750
+    def open_connection(self, master):
+
+        self.change_color(master)
         try:
-            pdb.set_trace()
+            # We connect to the OL750 with the number of the serial port only eg. 07
             com_port = self.root.preferences['ol750']['connection']['com']
             status = self.root.preferences['ol750']['obj'].SerialOpen(com_port)
 
@@ -68,22 +82,41 @@ class Main_Toolbar_Canvas(Gui_Canvas):
             print('Unable to connect.  Please check the cable connection')
 
 
+    # Close connection to OL750
+    def close_connection(self, master):
+
+        self.change_color(master)
+        try:
+            # Disconnect from the OL750
+            status = self.root.preferences['ol750']['connection']['com']
+
+            if status == 0:
+                self.change_color(master)
+        except:
+            print('Unable to disconnect.  Please wait.')
+
+
     # Change the color of the activity monitor
     def change_color(self, master):
 
         if self.button_color == "red":
             self.button_color = "green"
+            self.process_now(master, "green")
             print("green")
-            
+
         else:
             self.button_color = "red"
+            self.process_now(master, "red")
+
             print("red")
 
 
-        self.change_now(master)
+    # Change the button color and determine the process to execute based on the color
+    def process_now(self, master, color):
 
-    # The color needs to be explicitely forced
-    def change_now(self, master):
-
+        # Change the color of the connected/disconnected button
         master.canvases[self.canvas_name].itemconfig(self.oval_connected, fill=self.button_color)
-        Sample_Window(self.root, master)
+
+        # Only open the sample processing window if we are connecting, not when we are disconnecting
+        if (color == "green"):
+            Sample_Window(self.root, master)
