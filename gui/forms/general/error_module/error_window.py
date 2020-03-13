@@ -26,15 +26,19 @@ class Error_Window(Gui_Window):
     # Settings Window constructor
     def __init__(self, root, master, window_name, window_title, message_header, message_body):
 
+        Gui_Window.__init__(self, root, master, window_name, window_title)
+        
+        # Place this windows on top of any other window
+        self.gui_window.attributes("-topmost", True)
+        
         self.message_header = message_header
         self.message_body = message_body
-
-        Gui_Window.__init__(self, root, master, window_name, window_title)
-        self.create_error_window(master)
+        
+        self.create_error_window(root, master)
 
 
     # Create the actual window as a separate window
-    def create_error_window(self, master):
+    def create_error_window(self, root, master):
 
         master.windows[self.window_name].protocol("WM_DELETE_WINDOW", lambda: self.on_closing(master))
 

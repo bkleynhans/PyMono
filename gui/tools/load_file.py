@@ -29,6 +29,8 @@ import pdb
 from tkinter import *
 from tkinter import filedialog
 
+from gui.forms.general.error_module.error_window import Error_Window
+
 
 class Load_File:
 
@@ -42,7 +44,21 @@ class Load_File:
 
         self.data = {}
 
-        with open(file) as json_file:
-            self.data = json.load(json_file)
+        try:
+            with open(file) as json_file:
+                self.data = json.load(json_file)
+                self.data['status'] = "success"
+        except IOError:
+            Error_Window(
+                self.root,
+                self.master,
+                'error_window',
+                "File Read Error",
+                "Error Loading Config File",
+                "The preferences file, ol750.cfg, cannot be found.  Creating a new file, all preferences will be reset."
+            )
+            
+            print("The preferences file, ol750.cfg, cannot be found.  Creating a new file, all preferences will be reset.")
+            self.data['status'] = "failed"
 
         return self.data

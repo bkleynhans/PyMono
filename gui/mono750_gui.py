@@ -17,11 +17,13 @@
 # Imports
 import json
 import os
+import pdb
 
 from tkinter import *
 from tkinter import messagebox
 
 from lib.ol750_420_python_api import Ol750_420_Python_Api
+from gui.tools.load_file import Load_File
 
 
 class Mono750_Gui:
@@ -33,50 +35,56 @@ class Mono750_Gui:
         # Import gui paths
         from forms.main_window.menu_bar import Menu_Bar
         from forms.main_window.main_toolbar import Main_Toolbar
-        from forms.main_window.header_frame import Header_Frame
-        # from forms.main_window.input_module.input_frame import Input_Frame
-        # from forms.main_window.status_module.status_frame import Status_Frame
+        from forms.main_window.main_frame import Main_Frame
 
         # Create the root Tkinter object
         master.title('CIS Mono750 System Interface')
         master.geometry('1024x768')
         master.resizable(False, False)
-        #master.configure(background = '#FFFFFF')
 
         # Ensure the master frame cannot be detached from the main program
         master.option_add('*tearOff', False)
 
-        # Create a dictionary of preferences which will contain all the program settings
-        preferences = {
-            'ol750': {
-                'obj': None,
-                'status': 1,                            # Status 1 - not connected | Status 0 - connected
-                'connection': {
-                    'interface': 'serial',
-                    'com': '07',
-                    'gpib': {
-                        'pc_controller': 'gpib-00',
-                        '750_device': 'gpib-03'
-                    }
-                }
-            },
-            'os_details': {
-                'os': args['os'],
-            },
-            'project_root': args['project_root']
-        }
-        master.preferences = preferences
+        # # Create a dictionary of preferences which will contain all the program settings
+        # preferences = {
+        #     'ol750': {
+        #         'obj': None,
+        #         'status': 1,                            # Status 1 - not connected | Status 0 - connected
+        #         'connection': {
+        #             'interface': 'serial',
+        #             'com': '07',
+        #             'gpib': {
+        #                 'pc_controller': 'gpib-00',
+        #                 '750_device': 'gpib-03'
+        #             }
+        #         }
+        #     },
+        #     'os_details': {
+        #         'os': args['os'],
+        #     },
+        #     'project_root': args['project_root'],
+        #     'cut-on_wavelengths': ['Open', '290.00', '345.00', '602.00', '1119.00', '1949.00'
+        #                            '3599.00', '6399.00', '10999.00', '17999.00', 'SHUTTER']
+        # }
+        # master.preferences = preferences
+        
+        # # Build the path to the configuration file
+        # source_file = os.path.join(args['project_root'], 'gui', 'etc', 'ol750.cfg')
+        # # Create an instance of a file loader/reader object
+        # loader = Load_File(self.root, master)                
+        # # Read the contents of the file into the global preferences file
+        # master.preferences = loader.load(source_file)
 
-        # Create a dictionary to contain all the custom user settings
-        user_options = {
-            'sample1_frame': {
-                'starting_wavelength': '',
-                'ending_wavelength': '',
-                'change_in_wavelength': '',
-                'time_between_wavelengths': ''
-            }
-        }
-        master.user_options = user_options
+        # # Create a dictionary to contain all the custom user settings
+        # user_options = {
+        #     'sample1_frame': {
+        #         'starting_wavelength': '',
+        #         'ending_wavelength': '',
+        #         'change_in_wavelength': '',
+        #         'time_between_wavelengths': ''
+        #     }
+        # }
+        # master.user_options = user_options
 
         # Create notebook container to easily access notebooks from other areas in the gui
         notebooks = {}
@@ -109,11 +117,32 @@ class Mono750_Gui:
         Main_Toolbar(self.root, master)
 
         # Create the Header - accessed via master.header_frame
-        Header_Frame(self.root, master)
+        Main_Frame(self.root, master)
+        
+        # Build the path to the configuration file
+        source_file = os.path.join(args['project_root'], 'gui', 'etc', 'ol750.cfg')
+        # Create an instance of a file loader/reader object
+        loader = Load_File(self.root, master)                
+        # Read the contents of the file into the global preferences file
+        master.preferences = loader.load(source_file)
+        # Add the project root to the preferences dictionary
+        master.preferences['project_root'] = args['project_root']
+
+        # Create a dictionary to contain all the custom user settings
+        user_options = {
+            'sample1_frame': {
+                'starting_wavelength': '',
+                'ending_wavelength': '',
+                'change_in_wavelength': '',
+                'time_between_wavelengths': ''
+            }
+        }
+        master.user_options = user_options
 
         # Connect to the OL750 API
-        ol750 = Ol750_420_Python_Api(args)
-        master.preferences['ol750']['obj'] = ol750
+        self.root.ol750 = Ol750_420_Python_Api(args)
+        # master.preferences['ol750'] = {}
+        # master.preferences['ol750']['obj'] = ol750
 
 
 # Ask the user to confirm if they want to close the program
@@ -128,6 +157,12 @@ def on_closing(root):
 def main(project_root, args):
 
     root = Tk()
+    
+    # Move the GUI to the front of the display
+    root.lift()
+    root.attributes('-topmost', True)
+    root.after_idle(root.attributes, '-topmost', False)
+    
     root.project_root = project_root
 
     args['project_root'] = project_root

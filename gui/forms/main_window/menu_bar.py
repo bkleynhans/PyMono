@@ -19,6 +19,8 @@ from tkinter import ttk
 from gui import mono750_gui
 from gui.forms.main_window.help_menu import Help_Menu
 from gui.forms.modules.preferences.connection_module.connection_window import Connection_Window
+from gui.forms.modules.preferences.filter_wheel_module.filter_wheel_window import Filter_Wheel_Window
+from gui.forms.modules.preferences.grating_module.grating_window import Grating_Window
 
 
 class Menu_Bar():
@@ -52,7 +54,14 @@ class Menu_Bar():
         self.file_menu.entryconfig('Exit', accelerator = 'Ctrl+Q')
 
         # Define the Edit menu options
-        self.edit_menu.add_command(label = 'Preferences', command = lambda: Connection_Window(self.root, master))
+        self.preferences_menu = Menu(self.edit_menu)
+        
+        self.edit_menu.add_cascade(label='Preferences', menu = self.preferences_menu)
+        
+        # Define the Preferences sub-menu options
+        self.preferences_menu.add_command(label = 'Connection', command = lambda: Connection_Window(self.root, master))
+        self.preferences_menu.add_command(label = 'Filter Wheel Wavelengths', command = lambda: Filter_Wheel_Window(self.root, master))
+        self.preferences_menu.add_command(label = 'Setup Gratings', command = lambda: Grating_Window(self.root, master))
 
         # Define the Help menu options
         self.menu_bar.add_command(label = 'Help', command = lambda: Help_Menu(master)) # Open the readme file on the GitHub page for the project

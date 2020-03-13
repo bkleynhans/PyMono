@@ -58,7 +58,7 @@ class Save_File:
 
     def save(self):
 
-        json_data = json.dumps(self.data)
+        json_data = json.dumps(self.data, sort_keys=True, indent=4)
 
         filehandle = open(self.save_location, 'w')
         filehandle.writelines(json_data)

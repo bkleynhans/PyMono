@@ -9,7 +9,7 @@
 #
 # Last Modified By    : Benjamin Kleynhans
 # Last Modified Date  : October 29, 2019
-# Filename            : header_frame.py
+# Filename            : main_frame.py
 #
 ###
 
@@ -19,17 +19,17 @@ from tkinter import ttk
 from gui.forms.base_classes.gui_frame import Gui_Frame
 import pdb
 
-class Header_Frame(Gui_Frame):
+class Main_Frame(Gui_Frame):
 
     # Header Frame constructor
     def __init__(self, root, master):
 
         Gui_Frame.__init__(self, root, master, "header_frame")
-        self.create_header(master)
+        self.create_main(master)
 
 
-    # Create header frame object
-    def create_header(self, master):
+    # Create the main frame object
+    def create_main(self, master):
 
         master.frames[self.frame_name].pack(padx = 10, pady = (20, 0))
 

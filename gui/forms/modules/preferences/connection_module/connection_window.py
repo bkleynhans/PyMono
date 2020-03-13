@@ -20,7 +20,6 @@ from tkinter import messagebox
 from gui.forms.base_classes.gui_window import Gui_Window
 from gui.forms.modules.preferences.connection_module.connection_frame.connection_frame import Connection_Frame
 from gui.tools.save_file import Save_File
-from gui.tools.load_file import Load_File
 import pdb
 
 class Connection_Window(Gui_Window):
@@ -46,6 +45,24 @@ class Connection_Window(Gui_Window):
 
         master.windows[self.window_name].protocol("WM_DELETE_WINDOW", lambda: self.on_closing(master))
 
+        self.update_selectible()
+
+
+    def update_selectible(self):
+
+        if self.root.preferences['connection']['interface'] == 'serial':
+            for child in self.root.frames['gpib_address_frame'].winfo_children():
+                child.configure(state='disable')
+
+            for child in self.root.frames['com_port_frame'].winfo_children():
+                child.configure(state='enable')
+        elif self.root.preferences['connection']['interface'] == 'gpib':
+            for child in self.root.frames['gpib_address_frame'].winfo_children():
+                child.configure(state='enable')
+
+            for child in self.root.frames['com_port_frame'].winfo_children():
+                child.configure(state='disable')
+
 
     # Save changes made to connection
     def save_changes(self, master):
@@ -58,7 +75,4 @@ class Connection_Window(Gui_Window):
     # Action to perform when connection window is closed
     def on_closing(self, master):
 
-        if messagebox.askyesno("Save Preferences", "Do you wish to save your changes?"):
-            self.save_changes(master)
-        else:
-            master.windows[self.window_name].destroy()
+        self.save_changes(master)
