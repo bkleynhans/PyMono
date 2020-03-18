@@ -59,5 +59,6 @@ class Gui_Toolbar():
         self.windows = {}
         self.gui_toolbar.windows = self.windows
 
+        self.root.classes[self.toolbar_name] = self
         self.root.toolbars[self.toolbar_name] = self.gui_toolbar
         master.toolbars[self.toolbar_name] = self.gui_toolbar

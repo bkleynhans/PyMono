@@ -59,5 +59,6 @@ class Gui_Notebook():
         self.windows = {}
         self.gui_notebook.windows = self.windows
 
+        self.root.classes[self.notebook_name] = self
         self.root.notebooks[self.notebook_name] = self.gui_notebook
         master.notebooks[self.notebook_name] = self.gui_notebook

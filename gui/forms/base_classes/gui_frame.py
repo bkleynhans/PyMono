@@ -59,5 +59,6 @@ class Gui_Frame():
         self.windows = {}
         self.gui_frame.windows = self.windows
 
+        self.root.classes[self.frame_name] = self
         self.root.frames[self.frame_name] = self.gui_frame
         master.frames[self.frame_name] = self.gui_frame

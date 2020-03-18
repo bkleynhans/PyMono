@@ -59,5 +59,6 @@ class Gui_Canvas():
         self.windows = {}
         self.gui_canvas.windows = self.windows
 
+        self.root.classes[self.canvas_name] = self
         self.root.canvases[self.canvas_name] = self.gui_canvas
         master.canvases[self.canvas_name] = self.gui_canvas

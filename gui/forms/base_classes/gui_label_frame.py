@@ -60,5 +60,6 @@ class Gui_Label_Frame():
         self.windows = {}
         self.gui_label_frame.windows = self.windows
 
+        self.root.classes[self.frame_name] = self
         self.root.frames[self.frame_name] = self.gui_label_frame
         master.frames[self.frame_name] = self.gui_label_frame

@@ -60,5 +60,6 @@ class Gui_Window():
         self.windows = {}
         self.gui_window.windows = self.windows
 
+        self.root.classes[self.window_name] = self
         self.root.windows[self.window_name] = self.gui_window
         master.windows[self.window_name] = self.gui_window
