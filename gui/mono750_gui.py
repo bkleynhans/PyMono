@@ -67,11 +67,11 @@ class Mono750_Gui:
         #                            '3599.00', '6399.00', '10999.00', '17999.00', 'SHUTTER']
         # }
         # master.preferences = preferences
-        
+
         # # Build the path to the configuration file
         # source_file = os.path.join(args['project_root'], 'gui', 'etc', 'ol750.cfg')
         # # Create an instance of a file loader/reader object
-        # loader = Load_File(self.root, master)                
+        # loader = Load_File(self.root, master)
         # # Read the contents of the file into the global preferences file
         # master.preferences = loader.load(source_file)
 
@@ -85,6 +85,10 @@ class Mono750_Gui:
         #     }
         # }
         # master.user_options = user_options
+
+        # Create class container to easily access class definitions from other areas in the gui
+        classes = {}
+        master.classes = classes
 
         # Create notebook container to easily access notebooks from other areas in the gui
         notebooks = {}
@@ -118,11 +122,11 @@ class Mono750_Gui:
 
         # Create the Header - accessed via master.header_frame
         Main_Frame(self.root, master)
-        
+
         # Build the path to the configuration file
         source_file = os.path.join(args['project_root'], 'gui', 'etc', 'ol750.cfg')
         # Create an instance of a file loader/reader object
-        loader = Load_File(self.root, master)                
+        loader = Load_File(self.root, master)
         # Read the contents of the file into the global preferences file
         master.preferences = loader.load(source_file)
         # Add the project root to the preferences dictionary
@@ -157,12 +161,12 @@ def on_closing(root):
 def main(project_root, args):
 
     root = Tk()
-    
+
     # Move the GUI to the front of the display
     root.lift()
     root.attributes('-topmost', True)
     root.after_idle(root.attributes, '-topmost', False)
-    
+
     root.project_root = project_root
 
     args['project_root'] = project_root
