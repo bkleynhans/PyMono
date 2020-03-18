@@ -36,7 +36,8 @@ class Current_Grating_Frame(Gui_Label_Frame):
     def create_current_grating_frame(self, master):
 
         self.current_grating_selection = StringVar()
-        self.current_grating_selection.set('Turret 1')
+        self.current_grating_selection.set('grating_1')
+        self.root.preferences['gratings']['current_grating'] = self.current_grating_selection.get()
 
         # Add Radio button for Turret 1 selection
         ttk.Radiobutton(
@@ -47,6 +48,8 @@ class Current_Grating_Frame(Gui_Label_Frame):
                 width = 10,
                 command = lambda: self.toggle_active_selection(master, self.current_grating_selection)).grid(
                         row = 0,
+                        rowspan = 1,
+                        pady = 5,
                         column = 0
         )
 
@@ -59,8 +62,11 @@ class Current_Grating_Frame(Gui_Label_Frame):
                 width = 10,
                 command = lambda: self.toggle_active_selection(master, self.current_grating_selection)).grid(
                         row = 1,
-                        column = 0)
-                    
+                        rowspan = 1,
+                        pady = 5,
+                        column = 0
+        )
+
         # Add Radio button for Turret 13selection
         ttk.Radiobutton(
                 master.frames[self.frame_name],
@@ -70,11 +76,28 @@ class Current_Grating_Frame(Gui_Label_Frame):
                 width = 10,
                 command = lambda: self.toggle_active_selection(master, self.current_grating_selection)).grid(
                         row = 2,
-                        column = 0)
+                        rowspan = 1,
+                        pady = 5,
+                        column = 0
+        )
 
-        master.frames[self.frame_name].pack(side=LEFT, fill=BOTH, expand=True, anchor = 'w', padx = 10, pady = (20, 20))
+
+        master.frames[self.frame_name].grid(
+            row = 1,
+            column = 0,
+            rowspan = 1,
+            columnspan = 2,
+            padx = 10,
+            pady = 10,
+            sticky = 'nsew'
+        )
 
 
-    def update_selection(self, event):
 
-        self.root.preferences['connection']['com'] = event.widget.get()
+    def toggle_active_selection(self, master, selection):
+
+        self.root.classes['grating_frame'].save_current_values()
+
+        self.root.preferences['gratings']['current_grating'] = selection.get()
+
+        self.root.classes['grating_frame'].load_current_values()

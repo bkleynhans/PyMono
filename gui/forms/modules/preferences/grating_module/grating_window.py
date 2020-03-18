@@ -39,16 +39,7 @@ class Grating_Window(Gui_Window):
         Grating_Frame(self.root, master.windows[self.window_name])
 
 
-    # Save changes made to template
-    def save_changes(self, master):
-
-        pass
-        master.windows[self.window_name].destroy()
-
     # Action to perform when template window is closed
     def on_closing(self, master):
 
-        if messagebox.askyesno("Save Preferences", "Do you wish to save your changes?"):
-            self.save_changes(master)
-        else:
-            master.windows[self.window_name].destroy()
+        master.windows[self.window_name].destroy()

@@ -33,7 +33,8 @@ class Current_Turret_Frame(Gui_Label_Frame):
     def create_current_turret_frame(self, master):
 
         self.current_turret_selection = StringVar()
-        self.current_turret_selection.set('Turret 1')
+        self.current_turret_selection.set('turret_1')
+        self.root.preferences['gratings']['current_turret'] = self.current_turret_selection.get()
 
         # Add Radio button for Turret 1 selection
         ttk.Radiobutton(
@@ -44,6 +45,8 @@ class Current_Turret_Frame(Gui_Label_Frame):
                 width = 10,
                 command = lambda: self.toggle_active_selection(master, self.current_turret_selection)).grid(
                         row = 0,
+                        rowspan = 1,
+                        pady = 5,
                         column = 0
         )
 
@@ -55,9 +58,12 @@ class Current_Turret_Frame(Gui_Label_Frame):
                 value = 'turret_2',
                 width = 10,
                 command = lambda: self.toggle_active_selection(master, self.current_turret_selection)).grid(
-                        row = 1,
-                        column = 0)
-                    
+                        row = 2,
+                        rowspan = 1,
+                        pady = 5,
+                        column = 0
+        )
+
         # Add Radio button for Turret 13selection
         ttk.Radiobutton(
                 master.frames[self.frame_name],
@@ -66,12 +72,28 @@ class Current_Turret_Frame(Gui_Label_Frame):
                 value = 'turret_3',
                 width = 10,
                 command = lambda: self.toggle_active_selection(master, self.current_turret_selection)).grid(
-                        row = 2,
-                        column = 0)
+                        row = 4,
+                        rowspan = 1,
+                        pady = 5,
+                        column = 0
+        )
 
 
-        master.frames[self.frame_name].pack(side=TOP, fill=BOTH, expand=True, anchor = 'w', padx = 10, pady = (20, 0))
+        master.frames[self.frame_name].grid(
+            row = 0,
+            column = 0,
+            rowspan = 1,
+            columnspan = 2,
+            padx = 10,
+            pady = 10,
+            sticky = 'nsew'
+        )
+
 
     def toggle_active_selection(self, master, selection):
 
-        self.root.preferences['connection']['current_turret'] = selection.get()
+        self.root.classes['grating_frame'].save_current_values()
+
+        self.root.preferences['gratings']['current_turret'] = selection.get()
+
+        self.root.classes['grating_frame'].load_current_values()
