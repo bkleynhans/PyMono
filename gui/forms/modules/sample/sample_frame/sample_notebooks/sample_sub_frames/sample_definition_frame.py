@@ -9,7 +9,7 @@
 #
 # Last Modified By    : Benjamin Kleynhans
 # Last Modified Date  : February 18, 2020
-# Filename            : sample1_frame.py
+# Filename            : sample_definition_frame.py
 #
 ###
 
@@ -20,12 +20,12 @@ from tkinter import messagebox
 from gui.forms.base_classes.gui_label_frame import Gui_Label_Frame
 import pdb
 
-class Sample1_Frame(Gui_Label_Frame):
+class Sample_Definition_Frame(Gui_Label_Frame):
 
     # connection Frame constructor
     def __init__(self, root, master):
 
-        Gui_Label_Frame.__init__(self, root, master, "sample1_frame", "Sample1 Title")
+        Gui_Label_Frame.__init__(self, root, master, "sample_definition_frame", "Sample Definition")
 
         self.create_sample1_frame(master)
 
@@ -45,8 +45,8 @@ class Sample1_Frame(Gui_Label_Frame):
                 sticky = 'nsew'
             )
 
-        self.root.user_options[self.frame_name]['starting_wavelength'] = ttk.Entry(master.frames[self.frame_name], width = 20)
-        self.root.user_options[self.frame_name]['starting_wavelength'].grid(
+        master.frames[self.frame_name].widgets['starting_wavelength'] = ttk.Entry(master.frames[self.frame_name], width = 20)
+        master.frames[self.frame_name].widgets['starting_wavelength'].grid(
             row = 0,
             column = 1,
             # columnspan = 3,
@@ -67,8 +67,8 @@ class Sample1_Frame(Gui_Label_Frame):
                 sticky = 'nsew'
             )
 
-        self.root.user_options[self.frame_name]['ending_wavelength'] = ttk.Entry(master.frames[self.frame_name], width = 20)
-        self.root.user_options[self.frame_name]['ending_wavelength'].grid(
+        master.frames[self.frame_name].widgets['ending_wavelength'] = ttk.Entry(master.frames[self.frame_name], width = 20)
+        master.frames[self.frame_name].widgets['ending_wavelength'].grid(
             row = 1,
             column = 1,
             # columnspan = 3,
@@ -89,8 +89,8 @@ class Sample1_Frame(Gui_Label_Frame):
                 sticky = 'nsew'
             )
 
-        self.root.user_options[self.frame_name]['change_in_wavelength'] = ttk.Entry(master.frames[self.frame_name], width = 20)
-        self.root.user_options[self.frame_name]['change_in_wavelength'].grid(
+        master.frames[self.frame_name].widgets['change_in_wavelength'] = ttk.Entry(master.frames[self.frame_name], width = 20)
+        master.frames[self.frame_name].widgets['change_in_wavelength'].grid(
             row = 2,
             column = 1,
             # columnspan = 3,
@@ -111,8 +111,8 @@ class Sample1_Frame(Gui_Label_Frame):
                 sticky = 'nsew'
             )
 
-        self.root.user_options[self.frame_name]['time_between_wavelengths'] = ttk.Entry(master.frames[self.frame_name], width = 20)
-        self.root.user_options[self.frame_name]['time_between_wavelengths'].grid(
+        master.frames[self.frame_name].widgets['time_between_wavelengths'] = ttk.Entry(master.frames[self.frame_name], width = 20)
+        master.frames[self.frame_name].widgets['time_between_wavelengths'].grid(
             row = 3,
             column = 1,
             # columnspan = 3,
