@@ -6,7 +6,8 @@
 #   programming interface to the Gooch & Housego dll for the OL750-420
 #
 # For detailed documentation about the functions contained in this file, please
-#   refer to the file "2015 750-420 SDK.NET DLL.M000274.RevF.pdf" in this directory.
+#   refer to the file "2015 750-420 SDK.NET DLL.M000274.RevF.pdf" in the
+#   project root directory.
 #
 # Created By          : Benjamin Kleynhans
 # Creation Date       : January 27, 2020
@@ -14,7 +15,7 @@
 #
 # Last Modified By    : Benjamin Kleynhans
 # Last Modified Date  : January 29, 2020
-# Filename            : ol750-420sdk.py
+# Filename            : ol750_sdk_library_python.py
 #
 # mapping instructions : https://stackoverflow.com/questions/252417/how-can-i-use-a-dll-file-from-python
 # https://stackoverflow.com/questions/49942487/python-for-net-how-to-explicitly-create-instances-of-c-sharp-classes-using-dif
@@ -29,7 +30,7 @@ import pdb
 import clr
 import System
 
-class Ol750_420_Python_Api():
+class OL750_420_Python_Api():
 
     # Constructor
     def __init__(self, args):
@@ -92,11 +93,19 @@ class Ol750_420_Python_Api():
     def ManualHomeWavelengthDrive(self):
     	return self.ol750Api.ManualHomeWavelengthDrive()
 
-    def ManualSet75MAPositions(self, yaw, pitch, translation, yawOffset, pitchOffset, translationOffset):
+    # The ManualSet75MAPositions method is an overloaded method which Python doesn't
+    # support, as such the two methods have been renamed accordingly
+    #
+    # -> ManualSet75MAPositions requiring yaw, pitch and translation    => ManualSet75MAPositionsYPT
+    # -> ManualSet75MAPositions requiring degrees                       => ManualSet75MAPositionsD
+    #
+#->
+    def ManualSet75MAPositionsYPT(self, yaw, pitch, translation, yawOffset, pitchOffset, translationOffset):
     	return self.ol750Api.ManualSet75MAPositions(yaw, pitch, translation, yawOffset, pitchOffset, translationOffset)
 
-    # def ManualSet75MAPositions(self, sampleAngleInDegrees, detectorAngleInDegrees, sampleOffsetInDegrees, detectorOffsetInDegrees):
-    # 	return self.ol750Api.ManualSet75MAPositions(sampleAngleInDegrees, detectorAngleInDegrees, sampleOffsetInDegrees, detectorOffsetInDegrees)
+#->
+    def ManualSet75MAPositionsD(self, sampleAngleInDegrees, detectorAngleInDegrees, sampleOffsetInDegrees, detectorOffsetInDegrees):
+    	return self.ol750Api.ManualSet75MAPositions(sampleAngleInDegrees, detectorAngleInDegrees, sampleOffsetInDegrees, detectorOffsetInDegrees)
 
     def ManualSetAutoLightSource(self, position):
     	return self.ol750Api.ManualSetAutoLightSource(position)
