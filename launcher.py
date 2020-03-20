@@ -19,7 +19,6 @@ import subprocess as sp
 import pdb
 
 # Module Imports
-from lib.ol750_420_python_api import Ol750_420_Python_Api
 from gui import mono750_gui
 
 # Definitions
