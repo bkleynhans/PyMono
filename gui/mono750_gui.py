@@ -22,7 +22,8 @@ import pdb
 from tkinter import *
 from tkinter import messagebox
 
-from lib.ol750_420_python_api import Ol750_420_Python_Api
+# from lib.ol750_420_python_api import OL750_420_Python_Api
+from lib.ol750_pymono_interface import OL750_PyMono_Interface
 from gui.tools.load_file import Load_File
 
 
@@ -44,47 +45,6 @@ class Mono750_Gui:
 
         # Ensure the master frame cannot be detached from the main program
         master.option_add('*tearOff', False)
-
-        # # Create a dictionary of preferences which will contain all the program settings
-        # preferences = {
-        #     'ol750': {
-        #         'obj': None,
-        #         'status': 1,                            # Status 1 - not connected | Status 0 - connected
-        #         'connection': {
-        #             'interface': 'serial',
-        #             'com': '07',
-        #             'gpib': {
-        #                 'pc_controller': 'gpib-00',
-        #                 '750_device': 'gpib-03'
-        #             }
-        #         }
-        #     },
-        #     'os_details': {
-        #         'os': args['os'],
-        #     },
-        #     'project_root': args['project_root'],
-        #     'cut-on_wavelengths': ['Open', '290.00', '345.00', '602.00', '1119.00', '1949.00'
-        #                            '3599.00', '6399.00', '10999.00', '17999.00', 'SHUTTER']
-        # }
-        # master.preferences = preferences
-
-        # # Build the path to the configuration file
-        # source_file = os.path.join(args['project_root'], 'gui', 'etc', 'ol750.cfg')
-        # # Create an instance of a file loader/reader object
-        # loader = Load_File(self.root, master)
-        # # Read the contents of the file into the global preferences file
-        # master.preferences = loader.load(source_file)
-
-        # # Create a dictionary to contain all the custom user settings
-        # user_options = {
-        #     'sample1_frame': {
-        #         'starting_wavelength': '',
-        #         'ending_wavelength': '',
-        #         'change_in_wavelength': '',
-        #         'time_between_wavelengths': ''
-        #     }
-        # }
-        # master.user_options = user_options
 
         # Create class container to easily access class definitions from other areas in the gui
         classes = {}
@@ -134,7 +94,7 @@ class Mono750_Gui:
 
         # Create a dictionary to contain all the custom user settings
         user_options = {
-            'sample1_frame': {
+            'sample_definition': {
                 'starting_wavelength': '',
                 'ending_wavelength': '',
                 'change_in_wavelength': '',
@@ -144,9 +104,7 @@ class Mono750_Gui:
         master.user_options = user_options
 
         # Connect to the OL750 API
-        self.root.ol750 = Ol750_420_Python_Api(args)
-        # master.preferences['ol750'] = {}
-        # master.preferences['ol750']['obj'] = ol750
+        self.root.ol750 = OL750_PyMono_Interface(self.root, master, args)
 
 
 # Ask the user to confirm if they want to close the program
