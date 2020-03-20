@@ -18,6 +18,7 @@ from tkinter import *
 from tkinter import ttk
 from gui.forms.base_classes.gui_canvas import Gui_Canvas
 from gui.forms.modules.sample.sample_window import Sample_Window
+from gui.forms.general.error_module.error_window import Error_Window
 import pdb
 
 class Main_Toolbar_Canvas(Gui_Canvas):
@@ -59,39 +60,48 @@ class Main_Toolbar_Canvas(Gui_Canvas):
 
         if self.status_button['text'] == "Connect":
             self.status_button['text'] = "Disconnect"
+            self.change_color(master)
 
-            self.close_connection(master)
+            if self.open_connection(master) == 0:
+                self.status_button['text'] = "Disconnect"
+                self.change_color(master)
+            else:
+                Error_Window(
+                    self.root,
+                    master,
+                    "Connection Error",
+                    "OL750 Error",
+                    "Unable to connect",
+                    "Unable to connect to the OL750 Monochrometer. Please check the cable connection and try again."
+                )
+
         else:
             self.status_button['text'] = "Connect"
 
-            self.open_connection(master)
+            self.close_connection(master)
 
 
     # Open connection to OL750
     def open_connection(self, master):
 
-        self.change_color(master)
+        status = None
+
         try:
-            # We connect to the OL750 with the number of the serial port only eg. 07
-            com_port = self.root.preferences['ol750']['connection']['com']
-            status = self.root.preferences['ol750']['obj'].SerialOpen(com_port)
+            status = self.root.ol750.open_connection()
+        except BaseException as e:
+            print("An error occurred in main_toolbar_canvas.py - open_connection")
+            status = 1
 
-            if status == 0:
-                self.change_color(master)
-        except:
-            print('Unable to connect.  Please check the cable connection')
-
+        return status
 
     # Close connection to OL750
     def close_connection(self, master):
 
-        self.change_color(master)
         try:
-            # Disconnect from the OL750
-            status = self.root.preferences['ol750']['connection']['com']
+            self.root.ol750.close_connection()
 
-            if status == 0:
-                self.change_color(master)
+            self.change_color(master)
+
         except:
             print('Unable to disconnect.  Please wait.')
 
