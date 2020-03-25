@@ -20,7 +20,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from gui.forms.base_classes.gui_label_frame import Gui_Label_Frame
-# from gui.forms.modules.sample.sample_frame.sample_notebooks.sample_notebook import Sample_Notebook
+from gui.forms.general.error_module.error_window import Error_Window
 from gui.forms.modules.sample.sample_frame.sample_notebooks.sample_sub_frames.sample_definition_frame import Sample_Definition_Frame
 import pdb
 
@@ -89,21 +89,35 @@ class Sample_Frame(Gui_Label_Frame):
     # Process the Start/Pause button operation
     def process_start_pause_button(self, master):
 
-        process_button = master.frames[self.frame_name].widgets['process_button']
+        data_is_valid = self.read_sample_definition(master)
 
-        if process_button['text'] == "Start":
-            master.frames[self.frame_name].widgets['process_button']['text'] = "Pause"
-            master.frames[self.frame_name].widgets['process_button']['state'] = "disabled"
+        if data_is_valid:
+            process_button = master.frames[self.frame_name].widgets['process_button']
 
-            if self.root.preferences['sample_status'] == "stopped":
-                self.process_start(master)
+            if process_button['text'] == "Start":
+                master.frames[self.frame_name].widgets['process_button']['text'] = "Pause"
+                master.frames[self.frame_name].widgets['process_button']['state'] = "disabled"
+
+                if self.root.preferences['sample_status'] == "stopped":
+                    self.process_start(master)
+                else:
+                    self.root.preferences['sample_status'] = "running"
             else:
-                self.root.preferences['sample_status'] = "running"
-        else:
-            master.frames[self.frame_name].widgets['process_button']['text'] = "Start"
-            master.frames[self.frame_name].widgets['process_button']['state'] = "enable"
+                master.frames[self.frame_name].widgets['process_button']['text'] = "Start"
+                master.frames[self.frame_name].widgets['process_button']['state'] = "enable"
 
-            self.process_pause(master)
+                self.process_pause(master)
+        else:
+            Error_Window(
+                self.root,
+                master,
+                "Invalid Input",
+                "OL750 Error",
+                "Supplied values are invalid",
+                "Please ensure the following parameters are met:\n" +
+                "1. The starting wavelength is smaller than the ending wavelength\n" +
+                "2. The ending wavelength is larger than the starting wavelength + delta_nm"
+            )
 
 
     # Process the stop button
@@ -116,8 +130,6 @@ class Sample_Frame(Gui_Label_Frame):
         print("started")
         self.root.preferences['sample_status'] = "running"
 
-        self.read_sample_definition(master)
-
         self.sample_thread = threading.Thread(target=self.root.ol750.start_sampling, args=())
         self.sample_thread.start()
 
@@ -128,6 +140,8 @@ class Sample_Frame(Gui_Label_Frame):
 
 
     def read_sample_definition(self, master):
+
+        is_valid = False
 
         sample_definition_frame = self.root.frames['sample_definition_frame']
 
@@ -140,6 +154,12 @@ class Sample_Frame(Gui_Label_Frame):
         self.root.user_options['sample_definition']['ending_wavelengths'] = ending_nm
         self.root.user_options['sample_definition']['change_in_wavelength'] = delta_nm
         self.root.user_options['sample_definition']['time_between_wavelengths'] = delta_t
+
+        if ((starting_nm < ending_nm) and
+            ((starting_nm + delta_nm) < ending_nm)):
+            is_valid = True
+
+        return is_valid
 
 
     # Destructor.  Usually not needed but in this case required to get rid of threads
