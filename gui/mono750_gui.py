@@ -22,7 +22,6 @@ import pdb
 from tkinter import *
 from tkinter import messagebox
 
-# from lib.ol750_420_python_api import OL750_420_Python_Api
 from lib.ol750_pymono_interface import OL750_PyMono_Interface
 from gui.tools.load_file import Load_File
 
